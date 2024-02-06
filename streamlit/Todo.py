@@ -15,5 +15,5 @@ todos = requests.get("{}/todos".format(st.session_state.BASE_URL))
 if todos.ok:
     for todo in json.loads(todos.text):
         with st.expander(todo["title"]):
-            st.markdown("**{}**".format(todo["title"]))
+            st.markdown("**{}**".format(todo["description"]))
             st.markdown("- id {}".format(todo["id"]))
