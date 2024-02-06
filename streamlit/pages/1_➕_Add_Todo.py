@@ -12,7 +12,8 @@ st.title("create todo")
 title = st.text_input("Enter Todo Title")
 description = st.text_area("Enter Todo Description")
 if st.button("Add Todo"):
-    response = requests.post(f"{st.session_state.BASE_URL}/todos/", json={"title": title, "description": description})
+    response = requests.post("{}/todos/".format(st.session_state.BASE_URL), json={"title": title, "description": description})
     if response.status_code == 200:
+        id = json.loads(response.text)["id"]
         st.success("Todo added successfully")
-        st.info(f"New Todo Id is {json.loads(response.text)["id"]}",icon="ℹ️")
+        st.info("New Todo Id is {}".format(id),icon="ℹ️")

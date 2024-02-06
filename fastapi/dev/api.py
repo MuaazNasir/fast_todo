@@ -73,7 +73,3 @@ def delete_todo(id : int, db : Session = Depends(get_db)):
         return {"deleted" : True}
     else:
         raise HTTPException(status_code=404,detail="todo not found")
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000,reload=True)

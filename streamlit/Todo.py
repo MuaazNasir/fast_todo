@@ -3,7 +3,7 @@ import requests
 import json
 
 if not "BASE_URL" in st.session_state:
-    st.session_state.BASE_URL = "http://localhost:8000"
+    st.session_state.BASE_URL = "https://fast-todo-seven.vercel.app"
 
 st.set_page_config(
     page_title="Todo App",
@@ -11,9 +11,9 @@ st.set_page_config(
 )
 
 st.title("Your Todo")
-todos = requests.get(f"{st.session_state.BASE_URL}/todos")
+todos = requests.get("{}/todos".format(st.session_state.BASE_URL))
 if todos.ok:
     for todo in json.loads(todos.text):
         with st.expander(todo["title"]):
-            st.markdown(f"**{todo["description"]}**")
-            st.markdown(f"- id {todo["id"]}")
+            st.markdown("**{}**".format(todo["title"]))
+            st.markdown("- id {}".format(todo["id"]))

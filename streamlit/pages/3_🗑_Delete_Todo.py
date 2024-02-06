@@ -11,9 +11,9 @@ st.title("Delete Todo")
 todo_id = st.number_input("Todo ID", step=1,min_value=1)
 
 if st.button("Delete"):
-    todo = requests.get(f"{st.session_state.BASE_URL}/todos/{todo_id}")
+    todo = requests.get("{}/todos/{}".format(st.session_state.BASE_URL, todo_id))
     if todo.ok:
-        response = requests.delete(f"{st.session_state.BASE_URL}/todos/{todo_id}")
+        response = requests.delete("{}/todos/{}".format(st.session_state.BASE_URL, todo_id))
         if response.ok:
             st.success("Todo deleted successfully")
     else :

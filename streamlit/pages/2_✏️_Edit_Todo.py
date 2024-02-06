@@ -19,7 +19,7 @@ todo_id = st.number_input("Enter ID",min_value=1,step=1)
 
 
 if st.button("Go"):
-    todo_data = requests.get(f"{st.session_state.BASE_URL}/todos/{todo_id}")
+    todo_data = requests.get("{}/todos/{}".format(st.session_state.BASE_URL, todo_id))
     if not todo_data.ok:
         st.error("Invalid ID")
     else :
@@ -32,7 +32,7 @@ if st.session_state.step == 1 :
     description = st.text_input("Enter New Description",value=todo_data["description"])
     submit = st.button("Submit")
     if  submit:
-        response = requests.put(f"{st.session_state.BASE_URL}/todos/{todo_id}",json={"title":title,"description" : description})
+        response = requests.put("{}/todos/{}".format(st.session_state.BASE_URL,todo_id),json={"title":title,"description" : description})
         if response.ok :
             st.success("Successfully updated your Todo !")
         else :
